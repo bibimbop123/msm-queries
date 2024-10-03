@@ -1,0 +1,48 @@
+<h1>Eldest Director #<%= @the_eldest_director %> details</h1>
+
+<a href="/directors">Go back</a>
+</hr>
+
+<dl>
+  <dt>name</dt>
+  <dd><%= @the_eldest_director.name %></dd>
+
+  <dt>dob</dt>
+  <dd><%= @the_eldest_director.dob %></dd>
+
+  <dt>bio</dt>
+  <dd><%= @the_eldest_director.bio %></dd>
+
+  <dt>image</dt>
+  <dd><img src="<%= @the_eldest_director.image %>" width="200" ></dd>
+  
+  <dt>Created at</dt>
+  <dd><%= @the_eldest_director.created_at %></dd>
+
+  <dt>Updated at</dt>
+  <dd><%= @the_eldest_director.updated_at %></dd>
+</dl>
+
+<% matching_movies = Movie.where({ director_id: @the_eldest_director.id }) %>
+<h2>Filmography</h2>
+<table border="1">
+  <tr>
+    <th>Id</th>
+    <th>Image</th>
+    <th>Title</th>
+    <th>Year</th>
+    <th>Director</th>
+    <th></th>
+  </tr>
+
+  <% matching_movies.each do |a_movie| %>
+    <tr>
+      <td><%= a_movie.id %></td>
+      <td><img src="<%= a_movie.image %>" width="50"></td>
+      <td><%= a_movie.title %></td>
+      <td><%= a_movie.year %></td>
+      <td><%= @the_eldest_director.name %></td>
+      <td><a href="/movies/<%= a_movie.id %>">Show details</a></td>
+    </tr>
+  <% end %>
+</table>
